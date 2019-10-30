@@ -87,6 +87,7 @@ public class LocalhostServer {
     
     public let portNumber: UInt
     let server: CRHTTPServer
+    var routesCount: [String: Any]
     
     public var recordedRequests: [URLRequest]
     
@@ -94,6 +95,7 @@ public class LocalhostServer {
         server = CRHTTPServer()
         self.portNumber = portNumber
         recordedRequests = [URLRequest]()
+        routesCount = [:]
     }
     
     public static func initializeUsingRandomPortNumber() -> LocalhostServer{
@@ -120,7 +122,8 @@ public class LocalhostServer {
         if let allHeaderFields = httpUrlResponse.allHeaderFields as? [String: String] {
             crResponse.setAllHTTPHeaderFields(allHeaderFields)
         }
-        if let data = response.data as? Data {
+        if let urlString = request.url?.lastPathComponent,
+            let data = (routesCount[urlString] ?? response.data) as? Data {
             if let dataString = String(data: data, encoding: String.Encoding.utf8) {
                 crResponse.send(dataString)
                 return
@@ -134,6 +137,8 @@ public class LocalhostServer {
                responseData: Data,
                statusCode: Int = 200,
                responseHeaderFields: [String: String]? = nil) {
+        let pathString = path.replacingOccurrences(of: "/", with: "")
+        routesCount[pathString] = responseData
         let routeBlock = self.routeBlock(path: path,
                                          responseData: responseData,
                                          statusCode: statusCode,
