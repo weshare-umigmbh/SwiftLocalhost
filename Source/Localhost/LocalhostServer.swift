@@ -150,6 +150,8 @@ public class LocalhostServer {
             self.post(path, routeBlock: routeBlock)
         case .PUT:
             self.put(path, routeBlock: routeBlock)
+        case .PATCH:
+            self.patch(path, routeBlock: routeBlock)
         case .DELETE:
             self.delete(path, routeBlock: routeBlock)
         case .HEAD:
@@ -177,7 +179,7 @@ public class LocalhostServer {
 }
 
 public enum LocalhostRequestMethod {
-    case GET, POST, PUT, DELETE, HEAD, OPTIONS
+    case GET, POST, PUT, DELETE, HEAD, OPTIONS, PATCH
 }
 public struct LocalhostRequest {
     
