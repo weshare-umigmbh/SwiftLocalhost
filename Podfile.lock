@@ -7,7 +7,7 @@ DEPENDENCIES:
   - Criollo
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - CocoaAsyncSocket
     - Criollo
 
@@ -17,4 +17,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: dc9e07b26ef016ac09cfd83d40a67dcefb95e43b
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.4
